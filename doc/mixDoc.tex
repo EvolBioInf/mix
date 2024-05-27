@@ -1,0 +1,20 @@
+\documentclass[a4paper]{report}
+\input{header}
+\begin{document}
+\pagestyle{noweb}
+
+\title{\ty{mix}: Minimal Unix Box}
+\author{Bernhard Haubold}
+\date{\input{date.txt}\!\!, \input{version.txt}}
+\maketitle
+
+\tableofcontents
+
+\chapter{Introduction}
+\input{intro}
+\chapter{Construct \ty{mix}}\label{ch:mix}
+\input{mix}
+
+\bibliography{ref}
+\end{document}
+

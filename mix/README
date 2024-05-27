@@ -1,0 +1,6 @@
+# mix: a minimal unix box
+- Password for jdoe: password
+- Install a package
+sudo apt update
+sudo apt install <package>
+- Place private executables in ~/bin

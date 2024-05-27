@@ -1,0 +1,27 @@
+The promise of good software is that it runs on any system. In
+practice, however, running a given program on an arbitrary host is
+difficult. This is known as the ``compatibility problem'' or the
+``shipping problem'' and we leave its solution to the experts. In the
+past decade they have come up with a brilliant solution to the
+shipping problem, Docker. Docker containers are abstractions of
+complete computers that run on any system. Docker thus reduces the
+problem of shipping software to the problem of running it on a Docker
+container. The experts then ensure that the Docker container runs
+anywhere.
+
+We aim to run our software on one specific Docker container. This
+should be a minimal box, which we call \ty{mix}. The name not only
+reminds us of \emph{minimal box}, but is also chosen in honor of the
+imaginary computer \ty{MIX} Donald Knuth programs on in his \emph{The
+Art of Computer Programming} books.
+
+Our computer \ty{mix} should be structured such that it makes setup on
+other hosts transparent. A good starting point might be the Windows
+Subsystem for Linux, wsl, which is part of the Windows operating
+system. Wsl comes with Ubuntu as default linux distro, so we also
+start from that. Moreover, it comes with a standard user that has sudo
+permissions. As to tooling, \ty{mix} should be as light-weight and
+generic as possible. On the other hand, there are two tools that we
+routinely need for testing our software, \ty{git} and \ty{golang}. Of
+the two, \ty{git} comes preinstalled with Ubuntu under wsl, while
+\ty{golang} doesn't. So we only include \ty{git} in \ty{mix}.

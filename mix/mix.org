@@ -1,0 +1,85 @@
+#+begin_export latex
+\section{Implementation}
+The outline of our \ty{Dockerfile} contains hooks for getting the base
+system, running commands, copying files, and setting up the
+environment.  \bpr{Dockerfile}{pr:df}
+#+end_export
+#+begin_src sh <<df>>=
+  ##<<Get base system, Pr. \ref{pr:df}>>
+  ##<<Run commands, Pr. \ref{pr:df}>>
+  ##<<Copy files, Pr. \ref{pr:df}>>
+  ##<<Set up environment, Pr. \ref{pr:df}>>
+#+end_src
+#+begin_export latex
+\epr
+Our base system is Ubuntu.
+#+end_export
+#+begin_src sh <<Get base system, Pr. \ref{pr:df}>>=
+  FROM ubuntu
+#+end_src
+#+begin_export latex
+We run commands to add packages and a user.
+#+end_export
+#+begin_src sh <<Run commands, Pr. \ref{pr:df}>>=
+  ##<<Add packages, Pr. \ref{pr:df}>>
+  ##<<Add user, Pr. \ref{pr:df}>>
+#+end_src
+#+begin_export latex
+Before we can add a package, we update the package manager,
+\ty{apt}. Then we install \ty{sudo} and \ty{git}.
+#+end_export
+#+begin_src sh <<Add packages, Pr. \ref{pr:df}>>=
+  RUN apt -y update && apt install -y sudo git
+#+end_src
+#+begin_export latex
+We call our user jdoe. Its password is ``password'', which we enter in
+hashed form. The default shell of jdoe is the bash and the account
+comes with sodoer privileges.
+#+end_export
+#+begin_src sh <<Add user, Pr. \ref{pr:df}>>=
+  RUN useradd -m -p NbqDBxZy0F.tE -s /bin/bash jdoe \
+      && usermod -aG sudo jdoe
+#+end_src
+#+begin_export latex
+To help users, we copy one file, \ty{README}, into the user's home
+directory.
+#+end_export
+#+begin_src sh <<Copy files, Pr. \ref{pr:df}>>=
+  COPY README /home/jdoe/
+#+end_src
+#+begin_export latex
+In the \ty{README} we explain how to install a package and how to
+install a private executable.
+#+end_export
+#+begin_src sh <<README>>=
+  # mix: a minimal unix box
+  - Password for jdoe: password
+  - Install a package
+  sudo apt update
+  sudo apt install <package>
+  - Place private executables in ~/bin
+#+end_src
+#+begin_export latex
+We set the user and its working directory. Then we set the home
+directory and the host name.
+#+end_export
+#+begin_src sh <<Set up environment, Pr. \ref{pr:df}>>=
+  USER jdoe
+  WORKDIR /home/jdoe
+  ENV HOME /home/jdoe && HOSTNAME mix
+#+end_src
+#+begin_export latex
+Once we've constructed the Docker container, we can start it by
+running the script \ty{start.sh}.
+#+end_export
+#+begin_src sh <<cli>>=
+  bash scripts/start.sh
+#+end_src
+#+begin_export latex
+Inside \ty{start.sh} we run \ty{docker} interactively, set \ty{mix} as
+its host name, and make sure we can use \ty{ctrl-p} to reach the
+previous command.
+#+end_export
+#+begin_src sh <<start>>=
+  docker run -it --hostname=mix --detach-keys="ctrl-@" mix
+#+end_src
