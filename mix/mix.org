@@ -1,10 +1,9 @@
 #+begin_export latex
-\section{Implementation}
 The outline of our \ty{Dockerfile} contains hooks for getting the base
 system, running commands, copying files, and setting up the
 environment.  \bpr{Dockerfile}{pr:df}
 #+end_export
-#+begin_src sh <<df>>=
+#+begin_src sh <<Dockerfile>>=
   ##<<Get base system, Pr. \ref{pr:df}>>
   ##<<Run commands, Pr. \ref{pr:df}>>
   ##<<Copy files, Pr. \ref{pr:df}>>
@@ -32,8 +31,8 @@ Before we can add a package, we update the package manager,
   RUN apt -y update && apt install -y sudo git
 #+end_src
 #+begin_export latex
-We call our user jdoe. Its password is ``password'', which we enter in
-hashed form. The default shell of jdoe is the bash and the account
+We call our user jdoe whose password is ``password''. This is entered
+in hashed form. The default shell of jdoe is the bash and the account
 comes with sodoer privileges.
 #+end_export
 #+begin_src sh <<Add user, Pr. \ref{pr:df}>>=
@@ -41,15 +40,14 @@ comes with sodoer privileges.
       && usermod -aG sudo jdoe
 #+end_src
 #+begin_export latex
-To help users, we copy one file, \ty{README}, into the user's home
-directory.
+To help users, we copy a \ty{README} into the user's home directory.
 #+end_export
 #+begin_src sh <<Copy files, Pr. \ref{pr:df}>>=
   COPY README /home/jdoe/
 #+end_src
 #+begin_export latex
-In the \ty{README} we explain how to install a package and how to
-install a private executable.
+In the \ty{README} we give jdoe's password, explain how to install a
+package, and how to install a private executable.
 #+end_export
 #+begin_src sh <<README>>=
   # mix: a minimal unix box
@@ -60,8 +58,9 @@ install a private executable.
   - Place private executables in ~/bin
 #+end_src
 #+begin_export latex
-We set the user and its working directory. Then we set the home
-directory and the host name.
+We set the user and his/her home directory as the working
+directory. Then we set two environment variables, the home directory
+and the host name, \ty{mix}.
 #+end_export
 #+begin_src sh <<Set up environment, Pr. \ref{pr:df}>>=
   USER jdoe
@@ -76,9 +75,10 @@ running the script \ty{start.sh}.
   bash scripts/start.sh
 #+end_src
 #+begin_export latex
-Inside \ty{start.sh} we run \ty{docker} interactively, set \ty{mix} as
-its host name, and make sure we can use \ty{ctrl-p} to reach the
-previous command.
+Inside \ty{start.sh}, we run the Docker container \ty{mix}
+interactively, set \ty{mix} as its host name, and make sure we can use
+\ty{ctrl-p} to reach the previous command by unsetting the keys to
+detach the container.
 #+end_export
 #+begin_src sh <<start>>=
   docker run -it --hostname=mix --detach-keys="ctrl-@" mix

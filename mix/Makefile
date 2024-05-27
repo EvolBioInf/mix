@@ -1,7 +1,7 @@
 all:
 tangle: Dockerfile README start.sh
 Dockerfile: mix.org README
-	bash ../scripts/org2nw mix.org | notangle -Rdf > Dockerfile
+	bash ../scripts/org2nw mix.org | notangle -RDockerfile > Dockerfile
 README: mix.org
 	bash ../scripts/org2nw mix.org | notangle -RREADME > README
 docker:
