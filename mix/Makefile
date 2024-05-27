@@ -5,7 +5,7 @@ Dockerfile: mix.org README
 README: mix.org
 	bash ../scripts/org2nw mix.org | notangle -RREADME > README
 docker:
-	sudo docker build -t mix .
+	docker build -t mix .
 start.sh: mix.org
 	bash ../scripts/org2nw mix.org | notangle -Rstart > start.sh
 clean:
