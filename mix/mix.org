@@ -10,11 +10,10 @@ environment.  \bpr{Dockerfile}{pr:df}
   ##<<Set up environment, Pr. \ref{pr:df}>>
 #+end_src
 #+begin_export latex
-\epr
-Our base system is Ubuntu.
+\epr Our base system is the latest stable version of Ubuntu.
 #+end_export
 #+begin_src sh <<Get base system, Pr. \ref{pr:df}>>=
-  FROM ubuntu
+  FROM ubuntu:latest
 #+end_src
 #+begin_export latex
 We run commands to add packages and a user.
@@ -31,7 +30,7 @@ Before we can add a package, we update the package manager,
   RUN apt -y update && apt install -y sudo git
 #+end_src
 #+begin_export latex
-We call our user jdoe whose password is ``password''. This is entered
+We call our user jdoe, whose password is ``password''. This is entered
 in hashed form. The default shell of jdoe is the bash and the account
 comes with sodoer privileges.
 #+end_export

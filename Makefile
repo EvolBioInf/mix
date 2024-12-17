@@ -3,7 +3,7 @@ all:
 		make -C $$a; \
 	done
 	cp mix/start.sh scripts
-	cd mix && sudo docker build -t mix . && cd -
+	cd mix && sudo docker build -t mix --no-cache . && cd -
 weave:
 	make -C doc
 clean:

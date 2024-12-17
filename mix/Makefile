@@ -1,4 +1,4 @@
-all:
+all: tangle docker
 tangle: Dockerfile README start.sh
 Dockerfile: mix.org README
 	bash ../scripts/org2nw mix.org | notangle -RDockerfile > Dockerfile
